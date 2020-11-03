@@ -8,18 +8,24 @@ public class Frame {
     private boolean secondRollPerformed;
 
     public void performFirstRoll(int knockedDownPins) {
-
+        this.firstRollPerformed = true;
+        this.firstRollKnockedPins = knockedDownPins;
     }
 
     public void performSecondRoll(int knockedDownPins) {
+        if(!this.firstRollPerformed)
+           throw  new RuntimeException("First roll not performed");
 
+        this.secondRollPerformed = true;
+        this.secondRollKnockedPins = knockedDownPins;
     }
 
     public boolean isFirstRollPerformed() {
-        return false;
+
+        return this.firstRollPerformed ;
     }
 
     public boolean isSecondRollPerformed() {
-        return false;
+        return this.secondRollPerformed ;
     }
 }

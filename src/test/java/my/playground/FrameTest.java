@@ -3,6 +3,8 @@ package my.playground;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.management.RuntimeErrorException;
+
 import static org.junit.Assert.*;
 
 public class FrameTest {
@@ -16,7 +18,7 @@ public class FrameTest {
 
     @Test
     public void isFirstRollPerformed() {
-        this.frame.performFirstRoll();
+        this.frame.performFirstRoll(0);
 
         boolean isFirstRollPerformed = this.frame.isFirstRollPerformed();
 
@@ -24,26 +26,25 @@ public class FrameTest {
     }
 
     @Test
-    public void isSecondRollPendingWhenFirstRollIsPending() {
+    public void isSecondRollPerformed() {
+        this.frame.performFirstRoll(0);
+        this.frame.performSecondRoll(0);
+
         boolean isSecondRollPerformed = this.frame.isSecondRollPerformed();
 
-        assertEquals(false, isSecondRollPerformed);
+        assertEquals(true, isSecondRollPerformed);
     }
 
-    @Test
-    public void isSecondRollPendingWhenFirstRollIsRunning() {
-        boolean isSecondRollPerformed = this.frame.isSecondRollPerformed();
+    @Test(expected = RuntimeException.class)
+    public void isFirstRollNotPerformedWhenSecondRollIsStarting(){
+        this.frame.performSecondRoll(0);
 
-        assertEquals(false, isSecondRollPerformed);
     }
 
-    @Test
-    public void isFirstRollPerformedWhenSecondRollIsRunning() {
+    @Test(expected = RuntimeException.class)
+    public void performSecondRollBeforeFirstRollThrowsException(){
+        this.frame.performSecondRoll(0);
         this.frame.performFirstRoll(0);
 
-        boolean isSecondRollPerformed = this.frame.isSecondRollPerformed();
-
-        assertEquals(false, isSecondRollPerformed);
     }
-
 }
