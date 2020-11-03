@@ -2,11 +2,17 @@ package my.playground;
 
 public class Game {
 
-    public void roll(int knockedPins) {
+    private int totalScore;
 
+    public void roll(int knockedPins) {
+        this.addScore(knockedPins);
     }
 
     public int score() {
-        return 0;
+        return totalScore;
+    }
+
+    public void addScore(int value){
+        totalScore += value;
     }
 }
