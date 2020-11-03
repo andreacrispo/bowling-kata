@@ -15,16 +15,30 @@ public class FrameTest {
     }
 
     @Test
-    public void isSecondRollPendingWhenFirstRollIsPending()
-    {
+    public void isFirstRollPerformed() {
+        this.frame.performFirstRoll();
+
+        boolean isFirstRollPerformed = this.frame.isFirstRollPerformed();
+
+        assertEquals(true, isFirstRollPerformed);
+    }
+
+    @Test
+    public void isSecondRollPendingWhenFirstRollIsPending() {
         boolean isSecondRollPerformed = this.frame.isSecondRollPerformed();
 
         assertEquals(false, isSecondRollPerformed);
     }
 
     @Test
-    public void isFirstRollPerformedWhenFirstRollIsPerformed()
-    {
+    public void isSecondRollPendingWhenFirstRollIsRunning() {
+        boolean isSecondRollPerformed = this.frame.isSecondRollPerformed();
+
+        assertEquals(false, isSecondRollPerformed);
+    }
+
+    @Test
+    public void isFirstRollPerformedWhenSecondRollIsRunning() {
         this.frame.performFirstRoll(0);
 
         boolean isSecondRollPerformed = this.frame.isSecondRollPerformed();
