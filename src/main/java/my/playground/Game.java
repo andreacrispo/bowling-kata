@@ -17,9 +17,10 @@ public class Game {
         if(frame == null)
             frame = new Frame();
 
-       /* if(!frame.isFirstRollPerformed())
+       if(!frame.isFirstRollPerformed())
             frame.performFirstRoll(knockedPins);
-              */
+        else if(!frame.isSecondRollPerformed())
+            frame.performSecondRoll(knockedPins);
 
         this.addScore(knockedPins);
     }

@@ -58,11 +58,25 @@ public class GameTest {
     }
 
     @Test
-    public void areRollsPerformed(){
-        this.game.roll(0);
+    public void isFirstRollPerformed(){
         this.game.roll(0);
 
         Frame frameGame = this.game.getFrame();
+
+        assertEquals(true,frameGame.isFirstRollPerformed());
+        assertEquals(false, frameGame.isSecondRollPerformed());
+    }
+
+    @Test
+    public void isSecondRollPerformed(){
+        this.game.roll(0);
+
+        Frame frameGame = this.game.getFrame();
+
+        assertEquals(true,frameGame.isFirstRollPerformed());
+        assertEquals(false, frameGame.isSecondRollPerformed());
+
+        this.game.roll(0);
 
         assertEquals(true,frameGame.isFirstRollPerformed());
         assertEquals(true, frameGame.isSecondRollPerformed());

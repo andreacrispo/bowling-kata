@@ -48,7 +48,15 @@ public class FrameTest {
 
     }
 
-    public void perfomTwoRolls(){
+    @Test
+    public void totalScoreIsValid(){
+        int totalScore;
 
+        this.frame.performFirstRoll(10);
+        this.frame.performSecondRoll(10);
+
+        totalScore = this.frame.calculateTotalScore();
+
+        assertEquals(20, totalScore);
     }
 }

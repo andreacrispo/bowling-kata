@@ -25,4 +25,8 @@ public class Frame {
     public boolean isSecondRollPerformed() {
         return this.secondRollPerformed ;
     }
+
+    public int calculateTotalScore() {
+        return this.firstRollKnockedPins + this.secondRollKnockedPins;
+    }
 }
