@@ -8,7 +8,7 @@ import static java.util.Arrays.asList;
 
 public class Game {
 
-    private List<Frame> frames;
+    private final List<Frame> frames;
     private int currentFrameIndex;
 
     public Game() {

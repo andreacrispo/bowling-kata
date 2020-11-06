@@ -22,7 +22,7 @@ public class FrameTest {
 
         boolean isFirstRollPerformed = this.frame.isFirstRollPerformed();
 
-        assertEquals(true, isFirstRollPerformed);
+        assertTrue(isFirstRollPerformed);
     }
 
     @Test
@@ -32,7 +32,7 @@ public class FrameTest {
 
         boolean isSecondRollPerformed = this.frame.isSecondRollPerformed();
 
-        assertEquals(true, isSecondRollPerformed);
+        assertTrue(isSecondRollPerformed);
     }
 
     @Test(expected = RuntimeException.class)

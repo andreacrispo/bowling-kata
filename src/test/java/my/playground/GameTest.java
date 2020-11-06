@@ -63,8 +63,8 @@ public class GameTest {
 
         Frame frameGame = this.game.getCurrentFrame();
 
-        assertEquals(true,frameGame.isFirstRollPerformed());
-        assertEquals(false, frameGame.isSecondRollPerformed());
+        assertTrue(frameGame.isFirstRollPerformed());
+        assertFalse(frameGame.isSecondRollPerformed());
     }
 
     @Test
@@ -73,13 +73,13 @@ public class GameTest {
 
         Frame frameGame = this.game.getCurrentFrame();
 
-        assertEquals(true,frameGame.isFirstRollPerformed());
-        assertEquals(false, frameGame.isSecondRollPerformed());
+        assertTrue(frameGame.isFirstRollPerformed());
+        assertFalse(frameGame.isSecondRollPerformed());
 
         this.game.roll(0);
 
-        assertEquals(true,frameGame.isFirstRollPerformed());
-        assertEquals(true, frameGame.isSecondRollPerformed());
+        assertTrue(frameGame.isFirstRollPerformed());
+        assertTrue(frameGame.isSecondRollPerformed());
     }
 
     @Test
@@ -92,11 +92,11 @@ public class GameTest {
 
         Frame frameGame = this.game.getCurrentFrame();
 
-        assertEquals(true,frameGame.isFirstRollPerformed());
-        assertEquals(true, frameGame.isSecondRollPerformed());
+        assertTrue(frameGame.isFirstRollPerformed());
+        assertTrue(frameGame.isSecondRollPerformed());
 
         frameGame = this.game.getCurrentFrame();
-        assertEquals(true, frameGame.isFirstRollPerformed());
+        assertTrue(frameGame.isFirstRollPerformed());
 
     }
 }
