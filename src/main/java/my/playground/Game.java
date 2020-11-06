@@ -2,8 +2,6 @@ package my.playground;
 
 public class Game {
 
-    private int totalScore;
-
     private Frame frame;
 
     public Frame getFrame() {
@@ -21,15 +19,9 @@ public class Game {
             frame.performFirstRoll(knockedPins);
         else if(!frame.isSecondRollPerformed())
             frame.performSecondRoll(knockedPins);
-
-        this.addScore(knockedPins);
     }
 
     public int score() {
-        return totalScore;
-    }
-
-    public void addScore(int value){
-        totalScore += value;
+        return this.frame.calculateTotalScore();
     }
 }
