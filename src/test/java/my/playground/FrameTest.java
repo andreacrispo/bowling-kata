@@ -59,4 +59,5 @@ public class FrameTest {
 
         assertEquals(20, totalScore);
     }
+
 }

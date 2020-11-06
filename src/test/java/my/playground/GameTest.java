@@ -1,7 +1,7 @@
 package my.playground;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -61,7 +61,7 @@ public class GameTest {
     public void isFirstRollPerformed(){
         this.game.roll(0);
 
-        Frame frameGame = this.game.getFrame();
+        Frame frameGame = this.game.getCurrentFrame();
 
         assertEquals(true,frameGame.isFirstRollPerformed());
         assertEquals(false, frameGame.isSecondRollPerformed());
@@ -71,7 +71,7 @@ public class GameTest {
     public void isSecondRollPerformed(){
         this.game.roll(0);
 
-        Frame frameGame = this.game.getFrame();
+        Frame frameGame = this.game.getCurrentFrame();
 
         assertEquals(true,frameGame.isFirstRollPerformed());
         assertEquals(false, frameGame.isSecondRollPerformed());
@@ -80,6 +80,24 @@ public class GameTest {
 
         assertEquals(true,frameGame.isFirstRollPerformed());
         assertEquals(true, frameGame.isSecondRollPerformed());
+    }
+
+    @Test
+    @Ignore
+    public void
+    should_first_frame_completed_and_second_frame_only_first_roll() {
+        this.game.roll(0);
+        this.game.roll(0);
+        this.game.roll(0);
+
+        Frame frameGame = this.game.getCurrentFrame();
+
+        assertEquals(true,frameGame.isFirstRollPerformed());
+        assertEquals(true, frameGame.isSecondRollPerformed());
+
+        frameGame = this.game.getCurrentFrame();
+        assertEquals(true, frameGame.isFirstRollPerformed());
+
     }
 }
 
