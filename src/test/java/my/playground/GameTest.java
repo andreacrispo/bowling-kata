@@ -44,6 +44,18 @@ public class GameTest {
 
         assertEquals(10, valueScore);
     }
+
+    @Test(expected = RuntimeException.class)
+    public void shouldThrowExceptionIfKnockedPinsNumberIsAbove10() {
+        int knockedPins = 11;
+        this.game.roll(knockedPins);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void shouldThrowExceptionIfKnockedPinsNumberIsBelow0() {
+        int knockedPins = -1;
+        this.game.roll(knockedPins);
+    }
 }
 
 
