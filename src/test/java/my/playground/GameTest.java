@@ -56,6 +56,17 @@ public class GameTest {
         int knockedPins = -1;
         this.game.roll(knockedPins);
     }
+
+    @Test
+    public void areRollsPerformed(){
+        this.game.roll(0);
+        this.game.roll(0);
+
+        Frame frameGame = this.game.getFrame();
+
+        assertEquals(true,frameGame.isFirstRollPerformed());
+        assertEquals(true, frameGame.isSecondRollPerformed());
+    }
 }
 
 

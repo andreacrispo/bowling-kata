@@ -20,10 +20,7 @@ public class Frame {
         this.secondRollKnockedPins = knockedDownPins;
     }
 
-    public boolean isFirstRollPerformed() {
-
-        return this.firstRollPerformed ;
-    }
+    public boolean isFirstRollPerformed() { return this.firstRollPerformed ; }
 
     public boolean isSecondRollPerformed() {
         return this.secondRollPerformed ;

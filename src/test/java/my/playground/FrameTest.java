@@ -47,4 +47,8 @@ public class FrameTest {
         this.frame.performFirstRoll(0);
 
     }
+
+    public void perfomTwoRolls(){
+
+    }
 }
