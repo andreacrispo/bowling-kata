@@ -1,18 +1,30 @@
 package my.playground;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
 
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
 
     private Game game;
 
-    @Before
+    @BeforeEach
     public void Game() {
         this.game = new Game();
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = { 0,1,2,3,4,5,6,7,8,9,10 })
+    public void givenNKnockedPinsExpectedValueScoreN(int knockedPins) {
+        this.game.roll(knockedPins);
+        int valueScore = this.game.score();
+
+        assertEquals(knockedPins, valueScore);
     }
 
     @Test
@@ -45,16 +57,22 @@ public class GameTest {
         assertEquals(10, valueScore);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test()
     public void shouldThrowExceptionIfKnockedPinsNumberIsAbove10() {
         int knockedPins = 11;
-        this.game.roll(knockedPins);
+        assertThrows(
+                RuntimeException.class,
+                () -> this.game.roll(knockedPins)
+        );
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test()
     public void shouldThrowExceptionIfKnockedPinsNumberIsBelow0() {
         int knockedPins = -1;
-        this.game.roll(knockedPins);
+        assertThrows(
+                RuntimeException.class,
+                () -> this.game.roll(knockedPins)
+        );
     }
 
     @Test
@@ -83,7 +101,7 @@ public class GameTest {
     }
 
     @Test
-    @Ignore
+    @Disabled
     public void
     should_first_frame_completed_and_second_frame_only_first_roll() {
         this.game.roll(0);

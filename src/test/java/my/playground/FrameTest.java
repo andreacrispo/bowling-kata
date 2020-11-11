@@ -1,17 +1,17 @@
 package my.playground;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
-import javax.management.RuntimeErrorException;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FrameTest {
 
     private Frame frame;
 
-    @Before
+    @BeforeEach
     public void frame(){
         this.frame = new Frame();
     }
@@ -35,29 +35,36 @@ public class FrameTest {
         assertTrue(isSecondRollPerformed);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test()
     public void isFirstRollNotPerformedWhenSecondRollIsStarting(){
-        this.frame.performSecondRoll(0);
-
+        assertThrows(
+                RuntimeException.class,
+                () -> this.frame.performSecondRoll(0)
+        );
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test()
     public void performSecondRollBeforeFirstRollThrowsException(){
-        this.frame.performSecondRoll(0);
-        this.frame.performFirstRoll(0);
-
+        assertThrows(
+                RuntimeException.class,
+                () -> {
+                    this.frame.performSecondRoll(0);
+                    this.frame.performFirstRoll(0);
+                }
+        );
     }
 
-    @Test
-    public void totalScoreIsValid(){
+    @ParameterizedTest
+    @ValueSource(ints = { 0,1,2,3,4,5,6,7,8,9,10 })
+    public void totalScoreIsValid(int pins){
         int totalScore;
 
-        this.frame.performFirstRoll(10);
-        this.frame.performSecondRoll(10);
+        this.frame.performFirstRoll(pins);
+        this.frame.performSecondRoll(pins);
 
         totalScore = this.frame.calculateTotalScore();
 
-        assertEquals(20, totalScore);
+        assertEquals(pins + pins, totalScore);
     }
 
 }
