@@ -67,12 +67,26 @@ public class FrameTest {
         assertEquals(pins + pins, totalScore);
     }
 
-    @Test
-    public void
-    whenTwoRollsKnock10PinsSpareIsGiven(){
+    @Test public void
+    whenOnlyOneRollsKnock10PinsSpareShouldNotBeAchieved(){
+        this.frame.roll(10);
+        assertFalse(this.frame.isSpareAchieved());
+    }
+
+    @Test public void
+    whenTwoRollsKnock10PinsSpareIsAchieved(){
         this.frame.roll(7);
         this.frame.roll(3);
         assertTrue(this.frame.isSpareAchieved());
+    }
+
+
+    @Test public void
+    whenOneRollKnock10PinsStrikeShouldBeAchieved() {
+        this.frame.roll(10);
+        assertTrue(this.frame.isStrikeAchieved());
+        assertTrue(this.frame.isFirstRollPerformed());
+        assertFalse(this.frame.isSecondRollPerformed());
     }
 
 }

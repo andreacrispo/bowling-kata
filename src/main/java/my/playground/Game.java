@@ -31,7 +31,7 @@ public class Game {
 
         currentFrame.roll(knockedPins);
 
-        if(currentFrame.isSecondRollPerformed()){
+        if(currentFrame.isDone()){
            nextFrame();
        }
     }

@@ -86,15 +86,35 @@ public class GameTest {
         this.game.roll(0);
         this.game.roll(0);
         this.game.roll(0);
-
         assertTrue(this.game.getFrames().get(0).isFirstRollPerformed());
         assertTrue(this.game.getFrames().get(0).isSecondRollPerformed());
-
         assertTrue(this.game.getFrames().get(1).isFirstRollPerformed());
-
     }
 
 
+
+    @Test public void
+    whenStrikeAchievedForAFrameShouldMoveToNextFrame() {
+        this.game.roll(10); // First frame
+        this.game.roll(0);  // Second frame
+        Frame firstFrame = this.game.getFrames().get(0);
+        assertTrue(firstFrame.isFirstRollPerformed());
+        assertFalse(firstFrame.isSecondRollPerformed());
+        assertTrue(firstFrame.isStrikeAchieved());
+
+        Frame secondFrame = this.game.getFrames().get(1);
+        assertTrue(secondFrame.isFirstRollPerformed());
+    }
+
+    @Test public void
+    whenStrikeAchievedTheFrameIsDone() {
+        this.game.roll(10);
+        Frame frame = this.game.getFrames().get(0);
+        assertTrue(frame.isFirstRollPerformed());
+        assertFalse(frame.isSecondRollPerformed());
+        assertTrue(frame.isStrikeAchieved());
+        assertTrue(frame.isDone());
+    }
 
 }
 

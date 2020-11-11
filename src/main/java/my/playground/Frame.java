@@ -2,6 +2,7 @@ package my.playground;
 
 public class Frame {
 
+    public static final int MAX_KNOCKABLE_PINS_PER_ROLL = 10;
     private int firstRollKnockedPins;
     private int secondRollKnockedPins;
     private boolean firstRollPerformed;
@@ -41,6 +42,20 @@ public class Frame {
     }
 
     public boolean isSpareAchieved() {
-        return this.calculateTotalScore() == 10;
+        if(this.firstRollPerformed && this.secondRollPerformed)
+            return this.calculateTotalScore() == MAX_KNOCKABLE_PINS_PER_ROLL;
+
+        return  false;
+    }
+
+    public boolean isStrikeAchieved() {
+        return this.calculateTotalScore() == MAX_KNOCKABLE_PINS_PER_ROLL;
+    }
+
+    public boolean isDone() {
+        if(isStrikeAchieved())
+            return true;
+
+        return firstRollPerformed && secondRollPerformed;
     }
 }
