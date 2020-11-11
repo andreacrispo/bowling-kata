@@ -39,4 +39,8 @@ public class Frame {
         else if(!this.secondRollPerformed)
             performSecondRoll(knockedPins);
     }
+
+    public boolean isSpareAchieved() {
+        return this.calculateTotalScore() == 10;
+    }
 }
