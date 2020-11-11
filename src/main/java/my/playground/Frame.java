@@ -20,7 +20,9 @@ public class Frame {
         this.secondRollKnockedPins = knockedDownPins;
     }
 
-    public boolean isFirstRollPerformed() { return this.firstRollPerformed ; }
+    public boolean isFirstRollPerformed() {
+        return this.firstRollPerformed;
+    }
 
     public boolean isSecondRollPerformed() {
         return this.secondRollPerformed ;
@@ -28,5 +30,13 @@ public class Frame {
 
     public int calculateTotalScore() {
         return this.firstRollKnockedPins + this.secondRollKnockedPins;
+    }
+
+    public void roll(int knockedPins) {
+
+        if(!this.firstRollPerformed)
+            performFirstRoll(knockedPins);
+        else if(!this.secondRollPerformed)
+            performSecondRoll(knockedPins);
     }
 }

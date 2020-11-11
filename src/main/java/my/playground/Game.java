@@ -1,10 +1,7 @@
 package my.playground;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 public class Game {
 
@@ -17,22 +14,24 @@ public class Game {
         this.frames.add(new Frame());
     }
 
+    public List<Frame> getFrames() {
+        return frames;
+    }
+
     public Frame getCurrentFrame() {
         return frames.get(currentFrameIndex);
     }
 
     public void roll(int knockedPins) {
+
         if(knockedPins > 10 || knockedPins < 0)
             throw new RuntimeException("Roll invalid knocked pins number");
 
-       Frame currentFrame = this.getCurrentFrame();
+        Frame currentFrame = this.getCurrentFrame();
 
-       if(!currentFrame.isFirstRollPerformed())
-           currentFrame.performFirstRoll(knockedPins);
-       else if(!currentFrame.isSecondRollPerformed())
-           currentFrame.performSecondRoll(knockedPins);
+        currentFrame.roll(knockedPins);
 
-       if(currentFrame.isSecondRollPerformed()){
+        if(currentFrame.isSecondRollPerformed()){
            nextFrame();
        }
     }

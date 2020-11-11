@@ -28,26 +28,6 @@ public class GameTest {
     }
 
     @Test
-    public void given0KnockedPinsExpectedValueScore0() {
-        int knockedPins = 0;
-
-        this.game.roll(knockedPins);
-        int valueScore = this.game.score();
-
-        assertEquals(0, valueScore);
-    }
-
-    @Test
-    public void given1KnockedPinsExpectedValueScore1() {
-        int knockedPins = 1;
-
-        this.game.roll(knockedPins);
-        int valueScore = this.game.score();
-
-        assertEquals(1, valueScore);
-    }
-
-    @Test
     public void given10KnockedPinsExpectedValueScore10() {
         int knockedPins = 10;
 
@@ -101,20 +81,16 @@ public class GameTest {
     }
 
     @Test
-    @Disabled
     public void
-    should_first_frame_completed_and_second_frame_only_first_roll() {
+    when_three_rolls_rolled_should_first_frame_completed_and_second_frame_only_first_roll() {
         this.game.roll(0);
         this.game.roll(0);
         this.game.roll(0);
 
-        Frame frameGame = this.game.getCurrentFrame();
+        assertTrue(this.game.getFrames().get(0).isFirstRollPerformed());
+        assertTrue(this.game.getFrames().get(0).isSecondRollPerformed());
 
-        assertTrue(frameGame.isFirstRollPerformed());
-        assertTrue(frameGame.isSecondRollPerformed());
-
-        frameGame = this.game.getCurrentFrame();
-        assertTrue(frameGame.isFirstRollPerformed());
+        assertTrue(this.game.getFrames().get(1).isFirstRollPerformed());
 
     }
 }
