@@ -5,11 +5,13 @@
 
 ## Overview
 * Works with two frames
+* Check for a special roll (Spare and Strike)
 * No bonus
 * Only single player
  
 ## TODO
- * Handle roll logic with two frames
+ * Handle spare score logic
+ * Handle strike score logic
 
 # COMPLETED: 
    * Work based on single frame
