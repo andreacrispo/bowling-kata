@@ -4,20 +4,18 @@
 
 
 ## Overview
-* Works with two frames
+* Works with N frames
 * Check for a special roll (Spare and Strike)
-* No bonus
+* Handle spare score logic
+* Handle strike score logic
 * Only single player
  
 ## TODO
- * Handle spare score logic
- * Handle strike score logic
+ * Handle consecutive spare score logic
+ * Handle consecutive strike score logic
+ * Handle 10th frame
 
-# COMPLETED: 
-   * Work based on single frame
-   * Work without bonus
-   * Only single player
-   
+
 ## Bowling Rules
 * The game consists of 10 frames. In each frame the player has two rolls to knock down 10 pins. The score for the frame is the total number of pins knocked down, plus bonuses for strikes and spares.
 
