@@ -63,4 +63,8 @@ public class Frame {
 
         return firstRollPerformed && secondRollPerformed;
     }
+
+    public void setBonus(int bonus) {
+        this.bonus = bonus;
+    }
 }

@@ -17,7 +17,7 @@ public class GameTest {
     }
 
     @ParameterizedTest
-    @ValueSource(ints = { 0,1,2,3,4,5,6,7,8,9,10 })
+    @ValueSource(ints = { 0,1,2,3,4,5,6,7,8,9 })
     public void givenNKnockedPinsExpectedValueScoreN(int knockedPins) {
         this.game.roll(knockedPins);
         int valueScore = this.game.score();
@@ -112,7 +112,8 @@ public class GameTest {
         assertTrue(frame.isDone());
     }
 
-    @Test public void TESTX() {
+    @Test public void
+    whenSpareIsAchievedFirstRollOfNextFrameSetsBonus() {
         this.game.roll(5);
         this.game.roll(5);
 
@@ -124,6 +125,33 @@ public class GameTest {
         assertEquals(11, firstFrame.calculateScoreWithBonus());
     }
 
+    @Test public void
+    whenSpareIsAchievedFirstRollOfNextFrameSetsBonus_2() {
+        this.game.roll(5);
+        this.game.roll(5);
+
+        Frame firstFrame = this.game.getFrames().get(0);
+        Frame secondFrame = this.game.getCurrentFrame();
+
+        this.game.roll(1);
+        this.game.roll(2);
+
+        assertEquals(11, firstFrame.calculateScoreWithBonus());
+    }
+
+    @Test public void
+    whenSpareIsAchievedFirstRollOfNextFrameSetsBonus_3() {
+        this.game.roll(5);
+        this.game.roll(5);
+
+        Frame firstFrame = this.game.getFrames().get(0);
+        Frame secondFrame = this.game.getCurrentFrame();
+
+        this.game.roll(1);
+        this.game.roll(2);
+
+        assertEquals(14, this.game.score());
+    }
 }
 
 
