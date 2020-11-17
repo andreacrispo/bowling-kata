@@ -1,8 +1,6 @@
 package my.playground;
 
-
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -91,8 +89,6 @@ public class GameTest {
         assertTrue(this.game.getFrames().get(1).isFirstRollPerformed());
     }
 
-
-
     @Test public void
     whenStrikeAchievedForAFrameShouldMoveToNextFrame() {
         this.game.roll(10); // First frame
@@ -114,6 +110,18 @@ public class GameTest {
         assertFalse(frame.isSecondRollPerformed());
         assertTrue(frame.isStrikeAchieved());
         assertTrue(frame.isDone());
+    }
+
+    @Test public void TESTX() {
+        this.game.roll(5);
+        this.game.roll(5);
+
+        Frame firstFrame = this.game.getFrames().get(0);
+        Frame secondFrame = this.game.getCurrentFrame();
+
+        this.game.roll(1);
+
+        assertEquals(11, firstFrame.calculateScoreWithBonus());
     }
 
 }

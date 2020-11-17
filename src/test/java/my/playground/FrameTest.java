@@ -62,7 +62,7 @@ public class FrameTest {
         this.frame.performFirstRoll(pins);
         this.frame.performSecondRoll(pins);
 
-        totalScore = this.frame.calculateTotalScore();
+        totalScore = this.frame.calculateScoreWithoutBonus();
 
         assertEquals(pins + pins, totalScore);
     }
@@ -88,5 +88,6 @@ public class FrameTest {
         assertTrue(this.frame.isFirstRollPerformed());
         assertFalse(this.frame.isSecondRollPerformed());
     }
+
 
 }

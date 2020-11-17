@@ -31,6 +31,8 @@ public class Game {
 
         currentFrame.roll(knockedPins);
 
+
+
         if(currentFrame.isDone()){
            nextFrame();
        }
@@ -44,7 +46,7 @@ public class Game {
     public int score() {
         return this.frames
                 .stream()
-                .mapToInt(Frame::calculateTotalScore)
+                .mapToInt(Frame::calculateScoreWithoutBonus)
                 .sum();
     }
 }
