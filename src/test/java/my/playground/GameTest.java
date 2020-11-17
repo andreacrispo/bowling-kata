@@ -137,6 +137,35 @@ public class GameTest {
 
     }
 
+    @Test public void
+    whenTwoSpare(){
+        this.game.roll(1);
+        this.game.roll(9);
+
+        this.game.roll(9);
+        this.game.roll(1);
+
+
+        this.game.roll(5);
+        this.game.roll(3);
+
+        assertEquals(10+9+10+5+8, this.game.score());
+    }
+
+    @Test public void
+    whenTwoStrikes(){
+        this.game.roll(10);
+
+
+        this.game.roll(10);
+
+        this.game.roll(5);
+        this.game.roll(3);
+
+        assertEquals((10+15)+(10+8)+(8), this.game.score());
+    }
+
+
 
 }
 

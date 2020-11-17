@@ -54,7 +54,16 @@ public class Game {
             }
             else if(current.isStrikeAchieved()) {
                 Frame next = this.frames.get(frameIndex+1);
-                current.setBonus(next.getFirstRollKnockedPins() + next.getSecondRollKnockedPins());
+                int strikeBonus = next.getFirstRollKnockedPins();
+                if(next.isStrikeAchieved()) {
+                    Frame nextOfNext = this.frames.get(frameIndex+2);
+                    strikeBonus += nextOfNext.getFirstRollKnockedPins();
+                }
+                else
+                {
+                    strikeBonus += next.getSecondRollKnockedPins();
+                }
+                current.setBonus(strikeBonus);
             }
 
             totalScore += current.calculateTotalScore();
