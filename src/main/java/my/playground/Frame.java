@@ -34,7 +34,7 @@ public class Frame {
         return this.firstRollKnockedPins + this.secondRollKnockedPins;
     }
 
-    public int calculateScoreWithBonus(){
+    public int calculateTotalScore(){
         return this.calculateScoreWithoutBonus() + this.bonus;
     }
 
@@ -66,5 +66,9 @@ public class Frame {
 
     public void setBonus(int bonus) {
         this.bonus = bonus;
+    }
+
+    public int getFirstRollKnockedPins() {
+        return this.firstRollKnockedPins;
     }
 }

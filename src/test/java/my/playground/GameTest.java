@@ -117,41 +117,28 @@ public class GameTest {
         this.game.roll(5);
         this.game.roll(5);
 
-        Frame firstFrame = this.game.getFrames().get(0);
-        Frame secondFrame = this.game.getCurrentFrame();
-
-        this.game.roll(1);
-
-        assertEquals(11, firstFrame.calculateScoreWithBonus());
-    }
-
-    @Test public void
-    whenSpareIsAchievedFirstRollOfNextFrameSetsBonus_2() {
-        this.game.roll(5);
-        this.game.roll(5);
-
-        Frame firstFrame = this.game.getFrames().get(0);
-        Frame secondFrame = this.game.getCurrentFrame();
-
-        this.game.roll(1);
-        this.game.roll(2);
-
-        assertEquals(11, firstFrame.calculateScoreWithBonus());
-    }
-
-    @Test public void
-    whenSpareIsAchievedFirstRollOfNextFrameSetsBonus_3() {
-        this.game.roll(5);
-        this.game.roll(5);
-
-        Frame firstFrame = this.game.getFrames().get(0);
-        Frame secondFrame = this.game.getCurrentFrame();
 
         this.game.roll(1);
         this.game.roll(2);
 
         assertEquals(14, this.game.score());
     }
+
+
+    @Test public void
+    whenSpareIsAchievedFirstRollOfNextFrameSetsBonus_1() {
+        this.game.roll(1);
+        this.game.roll(2);
+
+        this.game.roll(5);
+        this.game.roll(5);
+
+        this.game.roll(2);
+        this.game.roll(2);
+        assertEquals(3+10+2+4, this.game.score());
+    }
+
+
 }
 
 

@@ -31,29 +31,11 @@ public class Game {
 
         currentFrame.roll(knockedPins);
 
-        if(this.checkSpareAchievedOnPreviousFrame() && currentFrame.isFirstRollPerformed() && !currentFrame.isSecondRollPerformed()){
-            this.setSpareBonusToPreviousFrame(knockedPins);
-        }
-
         if(currentFrame.isDone()){
            nextFrame();
        }
     }
 
-    private boolean checkSpareAchievedOnPreviousFrame(){
-
-        if(this.currentFrameIndex > 0) {
-            Frame previousFrame = this.frames.get(this.currentFrameIndex - 1);
-            return previousFrame.isSpareAchieved();
-        }
-        return false;
-    }
-
-    private void setSpareBonusToPreviousFrame(int knockedPins) {
-
-        Frame previousFrame = this.frames.get(this.currentFrameIndex - 1);
-        previousFrame.setBonus(knockedPins);
-    }
 
     private void nextFrame() {
         this.currentFrameIndex++;
@@ -61,9 +43,19 @@ public class Game {
     }
 
     public int score() {
-        return this.frames
-                .stream()
-                .mapToInt(Frame::calculateScoreWithBonus)
-                .sum();
+        int totalScore = 0;
+
+        for(int frameIndex=0; frameIndex< this.frames.size(); frameIndex++){
+            Frame current = this.frames.get(frameIndex);
+
+            if(current.isSpareAchieved()){
+                Frame next = this.frames.get(frameIndex+1);
+                current.setBonus(next.getFirstRollKnockedPins());
+            }
+
+            totalScore += current.calculateTotalScore();
+        }
+
+        return totalScore;
     }
 }
