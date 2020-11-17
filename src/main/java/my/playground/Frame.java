@@ -30,12 +30,12 @@ public class Frame {
         return this.secondRollPerformed ;
     }
 
-    public int calculateScoreWithoutBonus() {
+    private int totalPinsKnockedDown() {
         return this.firstRollKnockedPins + this.secondRollKnockedPins;
     }
 
     public int calculateTotalScore(){
-        return this.calculateScoreWithoutBonus() + this.bonus;
+        return this.totalPinsKnockedDown() + this.bonus;
     }
 
     public void roll(int knockedPins) {
@@ -48,13 +48,13 @@ public class Frame {
 
     public boolean isSpareAchieved() {
         if(this.firstRollPerformed && this.secondRollPerformed)
-            return this.calculateScoreWithoutBonus() == MAX_KNOCKABLE_PINS_PER_ROLL;
+            return this.totalPinsKnockedDown() == MAX_KNOCKABLE_PINS_PER_ROLL;
 
         return  false;
     }
 
     public boolean isStrikeAchieved() {
-        return this.calculateScoreWithoutBonus() == MAX_KNOCKABLE_PINS_PER_ROLL;
+        return this.totalPinsKnockedDown() == MAX_KNOCKABLE_PINS_PER_ROLL;
     }
 
     public boolean isDone() {
@@ -70,5 +70,9 @@ public class Frame {
 
     public int getFirstRollKnockedPins() {
         return this.firstRollKnockedPins;
+    }
+
+    public int getSecondRollKnockedPins() {
+        return this.secondRollKnockedPins;
     }
 }

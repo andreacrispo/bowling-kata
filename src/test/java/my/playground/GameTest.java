@@ -112,21 +112,9 @@ public class GameTest {
         assertTrue(frame.isDone());
     }
 
-    @Test public void
-    whenSpareIsAchievedFirstRollOfNextFrameSetsBonus() {
-        this.game.roll(5);
-        this.game.roll(5);
-
-
-        this.game.roll(1);
-        this.game.roll(2);
-
-        assertEquals(14, this.game.score());
-    }
-
 
     @Test public void
-    whenSpareIsAchievedFirstRollOfNextFrameSetsBonus_1() {
+    whenSpareIsAchievedTheBonusIsFirstRollOfNextFrame() {
         this.game.roll(1);
         this.game.roll(2);
 
@@ -136,6 +124,17 @@ public class GameTest {
         this.game.roll(2);
         this.game.roll(2);
         assertEquals(3+10+2+4, this.game.score());
+    }
+
+    @Test public void
+    whenStrikeIsAchievedTheBonusIsFirstAndSecondRollOfNextFrameKnockedPins() {
+        this.game.roll(10);
+
+        this.game.roll(1);
+        this.game.roll(2);
+
+        assertEquals(10+1+2+3, this.game.score());
+
     }
 
 
