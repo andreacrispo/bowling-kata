@@ -5,9 +5,15 @@ import java.util.List;
 
 public class Game {
 
+    //Max number of frames in a standard game
     public static final int STANDARD_FRAMES_MAX_NUMBER = 10;
+    //Max number of frames in strikes game
+    public static final int STRIKE_MAX_FRAMES_NUMBER = 12;
+
     private final List<Frame> frames;
     private int currentFrameIndex;
+
+    private boolean gameOver = false;
 
     public Game() {
         this.currentFrameIndex = 0;
@@ -24,21 +30,24 @@ public class Game {
     }
 
     public void roll(int knockedPins) {
+        if(gameOver)
+            throw new RuntimeException("Game over");
 
         if(knockedPins > 10 || knockedPins < 0)
             throw new RuntimeException("Roll invalid knocked pins number");
-
-        if(this.currentFrameIndex >= 10 && !this.frames.get(this.currentFrameIndex - 1).isStrikeAchieved()) {
-            throw new RuntimeException("Exceed roll");
-        }
 
         Frame currentFrame = this.getCurrentFrame();
 
         currentFrame.roll(knockedPins);
 
-        if(currentFrame.isDone() && this.currentFrameIndex + 1 < STANDARD_FRAMES_MAX_NUMBER){
-           goToNextFrame();
-       }
+        if(currentFrame.isDone()) {
+            if (this.currentFrameIndex + 1 < STANDARD_FRAMES_MAX_NUMBER
+                    || currentFrame.isStrikeAchieved()
+                    || currentFrame.isSpareAchieved())
+                goToNextFrame();
+            else
+                gameOver = true;
+        }
     }
 
     private void goToNextFrame() {
