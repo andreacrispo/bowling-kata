@@ -47,14 +47,15 @@ public class Frame {
     }
 
     public boolean isSpareAchieved() {
-        if(this.firstRollPerformed && this.secondRollPerformed)
-            return this.totalPinsKnockedDown() == MAX_KNOCKABLE_PINS_PER_ROLL;
-
-        return  false;
+        return this.firstRollPerformed
+                && this.secondRollPerformed
+                && this.totalPinsKnockedDown() == MAX_KNOCKABLE_PINS_PER_ROLL;
     }
 
     public boolean isStrikeAchieved() {
-        return this.totalPinsKnockedDown() == MAX_KNOCKABLE_PINS_PER_ROLL;
+       return this.firstRollPerformed
+               && !this.secondRollPerformed
+               && this.totalPinsKnockedDown() == MAX_KNOCKABLE_PINS_PER_ROLL;
     }
 
     public boolean isDone() {

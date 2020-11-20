@@ -59,8 +59,8 @@ public class Game {
                     Frame nextOfNext = this.frames.get(frameIndex+2);
                     strikeBonus += nextOfNext.getFirstRollKnockedPins();
                 }
-                else
-                {
+                else{
+
                     strikeBonus += next.getSecondRollKnockedPins();
                 }
                 current.setBonus(strikeBonus);
