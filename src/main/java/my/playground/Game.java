@@ -27,6 +27,10 @@ public class Game {
         if(knockedPins > 10 || knockedPins < 0)
             throw new RuntimeException("Roll invalid knocked pins number");
 
+        if(currentFrameIndex >= 10) {
+            throw new RuntimeException("Exceed roll");
+        }
+
         Frame currentFrame = this.getCurrentFrame();
 
         currentFrame.roll(knockedPins);
