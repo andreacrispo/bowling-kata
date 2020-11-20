@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Game {
 
+    public static final int STANDARD_FRAMES_MAX_NUMBER = 10;
     private final List<Frame> frames;
     private int currentFrameIndex;
 
@@ -27,7 +28,7 @@ public class Game {
         if(knockedPins > 10 || knockedPins < 0)
             throw new RuntimeException("Roll invalid knocked pins number");
 
-        if(currentFrameIndex >= 10) {
+        if(this.currentFrameIndex >= 10 && !this.frames.get(this.currentFrameIndex - 1).isStrikeAchieved()) {
             throw new RuntimeException("Exceed roll");
         }
 
@@ -35,13 +36,13 @@ public class Game {
 
         currentFrame.roll(knockedPins);
 
-        if(currentFrame.isDone()){
-           nextFrame();
+        if(currentFrame.isDone() && this.currentFrameIndex + 1 < STANDARD_FRAMES_MAX_NUMBER){
+           goToNextFrame();
        }
     }
 
+    private void goToNextFrame() {
 
-    private void nextFrame() {
         this.currentFrameIndex++;
         this.frames.add(new Frame());
     }

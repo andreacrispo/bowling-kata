@@ -257,7 +257,6 @@ public class GameTest {
 
 
     @Test
-    @Disabled
     public void
     allow_to_roll_over_10_frame_if_last_is_strike() {
 
@@ -293,6 +292,43 @@ public class GameTest {
         // Allowed
         this.game.roll(1);
         this.game.roll(1);
+    }
+
+    @Test
+    public void
+    if_20_rolls_performed_10_frames_are_played() {
+
+        this.game.roll(1);
+        this.game.roll(1);
+
+        this.game.roll(1);
+        this.game.roll(1);
+
+        this.game.roll(1);
+        this.game.roll(1);
+
+        this.game.roll(1);
+        this.game.roll(1);
+
+        this.game.roll(1);
+        this.game.roll(1);
+
+        this.game.roll(1);
+        this.game.roll(1);
+
+        this.game.roll(1);
+        this.game.roll(1);
+
+        this.game.roll(1);
+        this.game.roll(1);
+
+        this.game.roll(1);
+        this.game.roll(1);
+
+        this.game.roll(1);
+        this.game.roll(1);
+
+        assertEquals(10, this.game.getFrames().size());
     }
 
 
