@@ -30,7 +30,7 @@ public class Frame {
         return this.secondRollPerformed ;
     }
 
-    private int totalPinsKnockedDown() {
+    public int totalPinsKnockedDown() {
         return this.firstRollKnockedPins + this.secondRollKnockedPins;
     }
 

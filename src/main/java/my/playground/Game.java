@@ -30,17 +30,17 @@ public class Game {
     }
 
     public void roll(int knockedPins) {
-        if(gameOver)
+        if (gameOver)
             throw new RuntimeException("Game over");
 
-        if(knockedPins > 10 || knockedPins < 0)
+        if (knockedPins > 10 || knockedPins < 0)
             throw new RuntimeException("Roll invalid knocked pins number");
 
         Frame currentFrame = this.getCurrentFrame();
 
         currentFrame.roll(knockedPins);
 
-        if(currentFrame.isDone()) {
+        if (currentFrame.isDone()) {
             if (this.currentFrameIndex + 1 < STANDARD_FRAMES_MAX_NUMBER
                     || currentFrame.isStrikeAchieved()
                     || currentFrame.isSpareAchieved())
@@ -59,42 +59,43 @@ public class Game {
     public int score() {
         int totalScore = 0;
 
-        for(int frameIndex=0; frameIndex< this.frames.size(); frameIndex++){
-
+        for (int frameIndex = 0; frameIndex < this.frames.size(); frameIndex++) {
             Frame current = this.frames.get(frameIndex);
-
-            if(current.isSpareAchieved()){
-
-                Frame next = this.frames.get(frameIndex+1);
-
-                int spareBonus = next.getFirstRollKnockedPins();
-
-                current.setBonus(spareBonus);
-            }
-            else if(current.isStrikeAchieved()) {
-
-                Frame next = this.frames.get(frameIndex+1);
-
-                int strikeBonus = next.getFirstRollKnockedPins();
-
-                if(next.isStrikeAchieved()) {
-                    Frame nextOfNext = this.frames.get(frameIndex+2);
-                    strikeBonus += nextOfNext.getFirstRollKnockedPins();
-                }
-                else{
-
-                    strikeBonus += next.getSecondRollKnockedPins();
-                }
-                current.setBonus(strikeBonus);
-            }
-
+            int bonus = calculateBonus(frameIndex, current);
+            current.setBonus(bonus);
             totalScore += current.calculateTotalScore();
 
-            if(frameIndex == 9){
+            if (frameIndex == 9) {
                 break;
             }
         }
 
         return totalScore;
     }
+
+    private int calculateBonus(int frameIndex, Frame current) {
+        if (current.isSpareAchieved()) {
+            return handleSpareScore(frameIndex);
+        } else if (current.isStrikeAchieved()) {
+            return handleStrikeScore(frameIndex);
+        }
+
+        return 0;
+    }
+
+    private int handleSpareScore(int frameIndex) {
+        Frame next = this.frames.get(frameIndex + 1);
+        return next.getFirstRollKnockedPins();
+    }
+
+    private int handleStrikeScore(int frameIndex) {
+        Frame next = this.frames.get(frameIndex + 1);
+        if (next.isStrikeAchieved()) {
+            Frame nextOfNext = this.frames.get(frameIndex + 2);
+            return next.getFirstRollKnockedPins() + nextOfNext.getFirstRollKnockedPins();
+        } else {
+            return next.totalPinsKnockedDown();
+        }
+    }
+
 }
