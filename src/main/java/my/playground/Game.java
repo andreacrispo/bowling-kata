@@ -7,9 +7,6 @@ public class Game {
 
     //Max number of frames in a standard game
     public static final int STANDARD_FRAMES_MAX_NUMBER = 10;
-    //Max number of frames in strikes game
-    public static final int STRIKE_MAX_FRAMES_NUMBER = 12;
-
     private final List<Frame> frames;
     private int currentFrameIndex;
 
@@ -30,7 +27,7 @@ public class Game {
     }
 
     public void roll(int knockedPins) {
-        if (gameOver)
+        if (this.gameOver)
             throw new RuntimeException("Game over");
 
         if (knockedPins > 10 || knockedPins < 0)
@@ -41,13 +38,17 @@ public class Game {
         currentFrame.roll(knockedPins);
 
         if (currentFrame.isDone()) {
-            if (this.currentFrameIndex + 1 < STANDARD_FRAMES_MAX_NUMBER
-                    || currentFrame.isStrikeAchieved()
-                    || currentFrame.isSpareAchieved())
-                goToNextFrame();
+            if (this.isGameOver(currentFrame))
+                this.gameOver = true;
             else
-                gameOver = true;
+                this.goToNextFrame();
         }
+    }
+
+    private boolean isGameOver(Frame currentFrame) {
+        return this.currentFrameIndex + 1 >= STANDARD_FRAMES_MAX_NUMBER
+                && !currentFrame.isStrikeAchieved()
+                && !currentFrame.isSpareAchieved();
     }
 
     private void goToNextFrame() {
@@ -58,27 +59,26 @@ public class Game {
 
     public int score() {
         int totalScore = 0;
+        int lastOrMaxFrameIndex = Math.min(this.frames.size(), STANDARD_FRAMES_MAX_NUMBER);
 
-        for (int frameIndex = 0; frameIndex < this.frames.size(); frameIndex++) {
+        for (int frameIndex = 0; frameIndex < lastOrMaxFrameIndex; frameIndex++) {
             Frame current = this.frames.get(frameIndex);
-            int bonus = calculateBonus(frameIndex, current);
+            int bonus = calculateBonus(frameIndex);
             current.setBonus(bonus);
             totalScore += current.calculateTotalScore();
 
-            if (frameIndex == 9) {
-                break;
-            }
         }
 
         return totalScore;
     }
 
-    private int calculateBonus(int frameIndex, Frame current) {
-        if (current.isSpareAchieved()) {
+    private int calculateBonus(int frameIndex) {
+        Frame frame = this.frames.get(frameIndex);
+        if (frame.isSpareAchieved())
             return handleSpareScore(frameIndex);
-        } else if (current.isStrikeAchieved()) {
+
+        if (frame.isStrikeAchieved())
             return handleStrikeScore(frameIndex);
-        }
 
         return 0;
     }
@@ -93,9 +93,8 @@ public class Game {
         if (next.isStrikeAchieved()) {
             Frame nextOfNext = this.frames.get(frameIndex + 2);
             return next.getFirstRollKnockedPins() + nextOfNext.getFirstRollKnockedPins();
-        } else {
-            return next.totalPinsKnockedDown();
         }
-    }
 
+        return next.totalPinsKnockedDown();
+    }
 }
