@@ -81,6 +81,10 @@ public class Game {
             }
 
             totalScore += current.calculateTotalScore();
+
+            if(frameIndex == 9){
+                break;
+            }
         }
 
         return totalScore;

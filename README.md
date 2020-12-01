@@ -11,10 +11,8 @@
 * Only single player
  
 ## TODO
- * Handle consecutive spare score logic
- * Handle consecutive strike score logic
  * Handle 10th frame
- * Check MaxFrame score equals 30 
+ * Check max total score game 300
 
 
 

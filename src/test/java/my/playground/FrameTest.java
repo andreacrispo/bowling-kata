@@ -88,6 +88,4 @@ public class FrameTest {
         assertTrue(this.frame.isFirstRollPerformed());
         assertFalse(this.frame.isSecondRollPerformed());
     }
-
-
 }

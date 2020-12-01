@@ -203,12 +203,15 @@ public class GameTest {
 
 
     @Test
-    @Disabled
     public void
     ensure_that_score_per_frame_does_not_exceed_30_points() {
         this.game.roll(10);
         this.game.roll(10);
         this.game.roll(10);
+
+        this.game.score();
+
+        assertEquals(30, this.game.getFrames().get(0).calculateTotalScore());
     }
 
 
@@ -331,6 +334,29 @@ public class GameTest {
         assertEquals(10, this.game.getFrames().size());
     }
 
+    @Test
+    public void
+    ensure_max_total_score_300_points() {
+
+        this.game.roll(10);
+        this.game.roll(10);
+        this.game.roll(10);
+
+        this.game.roll(10);
+        this.game.roll(10);
+        this.game.roll(10);
+
+        this.game.roll(10);
+        this.game.roll(10);
+        this.game.roll(10);
+
+        this.game.roll(10);
+
+        this.game.roll(10);
+        this.game.roll(10);
+
+        assertEquals(300, this.game.score());
+    }
 
 }
 
