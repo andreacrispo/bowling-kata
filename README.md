@@ -9,13 +9,15 @@
 * Handle spare score logic
 * Handle strike score logic
 * Only single player
+* Check max total score frame 30
+* Check max total score game 300
+* Handle 10th frame
  
 ## TODO
- * Handle 10th frame
- * Check max total score game 300
-
-
-
+ 
+ 
+ 
+ 
 ## Bowling Rules
 * The game consists of 10 frames. In each frame the player has two rolls to knock down 10 pins. The score for the frame is the total number of pins knocked down, plus bonuses for strikes and spares.
 

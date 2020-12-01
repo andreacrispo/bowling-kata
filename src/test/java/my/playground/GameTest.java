@@ -201,20 +201,6 @@ public class GameTest {
         assertEquals((10 + 10) + (10 + 5) + (8), this.game.score());
     }
 
-
-    @Test
-    public void
-    ensure_that_score_per_frame_does_not_exceed_30_points() {
-        this.game.roll(10);
-        this.game.roll(10);
-        this.game.roll(10);
-
-        this.game.score();
-
-        assertEquals(30, this.game.getFrames().get(0).calculateTotalScore());
-    }
-
-
     @Test
     public void
     throws_exception_if_try_to_roll_over_10_frame_and_last_is_not_strike() {
@@ -336,7 +322,31 @@ public class GameTest {
 
     @Test
     public void
-    ensure_max_total_score_300_points() {
+    ensure_that_score_per_frame_does_not_exceed_30_points() {
+        this.game.roll(10);
+        this.game.roll(10);
+        this.game.roll(10);
+
+        this.game.score();
+
+        assertEquals(30, this.game.getFrames().get(0).calculateTotalScore());
+    }
+
+    @Test
+    public void
+    ensure_score_per_frame_does_not_exceed_20_when_spare_and_strike() {
+        this.game.roll(7);
+        this.game.roll(3);
+        this.game.roll(10);
+
+        this.game.score();
+
+        assertEquals(20, this.game.getFrames().get(0).calculateTotalScore());
+    }
+
+    @Test
+    public void
+    ensure_max_total_score_300_points_with_strikes() {
 
         this.game.roll(10);
         this.game.roll(10);
@@ -356,6 +366,103 @@ public class GameTest {
         this.game.roll(10);
 
         assertEquals(300, this.game.score());
+    }
+
+    @Test
+    public void
+    ensure_max_total_score_200_points_with_spares() {
+
+        // 19
+        this.game.roll(9);
+        this.game.roll(1);
+
+        // 19
+        this.game.roll(9);
+        this.game.roll(1);
+
+        // 19
+        this.game.roll(9);
+        this.game.roll(1);
+
+        // 19
+        this.game.roll(9);
+        this.game.roll(1);
+
+        // 19
+        this.game.roll(9);
+        this.game.roll(1);
+
+        // 19
+        this.game.roll(9);
+        this.game.roll(1);
+
+        // 19
+        this.game.roll(9);
+        this.game.roll(1);
+
+        // 19
+        this.game.roll(9);
+        this.game.roll(1);
+
+        // 19
+        this.game.roll(9);
+        this.game.roll(1);
+
+        // 20
+        this.game.roll(9);
+        this.game.roll(1);
+
+
+        // 11th frame
+        this.game.roll(10);
+
+        assertEquals(191, this.game.score());
+    }
+
+
+    @Test
+    public void
+    pippo() {
+
+        // 5
+        this.game.roll(2);
+        this.game.roll(3);
+
+        // 13
+        this.game.roll(7);
+        this.game.roll(3);
+
+        // 3
+        this.game.roll(3);
+        this.game.roll(0);
+
+        // 8
+        this.game.roll(5);
+        this.game.roll(3);
+
+        // 8
+        this.game.roll(8);
+        this.game.roll(0);
+
+        // 20
+        this.game.roll(10);
+
+        // 16
+        this.game.roll(7);
+        this.game.roll(3);
+
+        // 8
+        this.game.roll(6);
+        this.game.roll(2);
+
+        // 17
+        this.game.roll(10);
+
+        // 7
+        this.game.roll(4);
+        this.game.roll(3);
+
+        assertEquals(105, this.game.score());
     }
 
 }

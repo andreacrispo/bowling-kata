@@ -60,15 +60,23 @@ public class Game {
         int totalScore = 0;
 
         for(int frameIndex=0; frameIndex< this.frames.size(); frameIndex++){
+
             Frame current = this.frames.get(frameIndex);
 
             if(current.isSpareAchieved()){
+
                 Frame next = this.frames.get(frameIndex+1);
-                current.setBonus(next.getFirstRollKnockedPins());
+
+                int spareBonus = next.getFirstRollKnockedPins();
+
+                current.setBonus(spareBonus);
             }
             else if(current.isStrikeAchieved()) {
+
                 Frame next = this.frames.get(frameIndex+1);
+
                 int strikeBonus = next.getFirstRollKnockedPins();
+
                 if(next.isStrikeAchieved()) {
                     Frame nextOfNext = this.frames.get(frameIndex+2);
                     strikeBonus += nextOfNext.getFirstRollKnockedPins();
